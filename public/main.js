@@ -22,10 +22,15 @@ var vm = new Vue({
             {
                 path: '/main/h5',
                 component: {
-                    template: '<h5>{{ this.own_msg }}</h5>',
+                    template: '<h5>{{ this.new_msg }}</h5>',
                     data: function() {
                         return {
-                            own_msg: 'app h5 : This is my own msg'
+                            own_msg: 'This is my own msg'
+                        }
+                    },
+                    computed: {
+                        new_msg: function() {
+                            return 'app h5 : ' + this.own_msg
                         }
                     }
                 }
@@ -75,6 +80,46 @@ var vm = new Vue({
         },
         input_change: function(data) {
             this.msg_h3 = data
+        }
+    }
+})
+
+var vm2 = new Vue({
+    el: '#app2',
+    data: {
+        message: '',
+        list: []
+    },
+    methods: {
+        getData: function() {
+            if(this.message === ''){
+                axios({
+                    method: 'GET',
+                    url: 'http://localhost:3000/value'
+                })
+                .then((res) => {
+                    //In lamda expression, this means Vue Instance
+                    //else, this means Window
+                    this.message = res.data
+                })
+            }
+            else{
+                this.message = ''
+            }
+        },
+        getList: function() {
+            if (this.list.length === 0) {
+                axios({
+                    method: 'GET',
+                    url: 'http://localhost:3000/value/list'
+                })
+                .then((res) => {
+                    this.list = res.data
+                })
+            }
+            else{
+                this.list = []
+            }
         }
     }
 })

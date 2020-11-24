@@ -7,14 +7,25 @@
 </head>
 <body>
     <div id='app'>
+        <!-- v- : vue directive -->
         <p v-on:click='click'>{{ message }}</p>
         <app-h1 v-bind:msg='msg_h1'></app-h1>
         <app-h2 v-on:pass='[h2_click($event), inc_num()]' v-bind:data='{msg: msg_h2, num: num}'></app-h2>
         <app-h3 v-bind:msg='msg_h3'></app-h3>
         <app-input v-on:pass='input_change'></app-input>
         <router-view></router-view>
+        </br>
         <router-link to='/main/h4'>h4</router-link>
         <router-link to='/main/h5'>h5</router-link>
+    </div>
+
+    <div id='app2'>
+        <button v-on:click='getData'>GETDATA</button>
+        <button v-on:click='getList'>GETLIST</button>
+        <p>{{ message }}</p>
+        <ul>
+            <li v-for='item in list'>{{ item.id }} : {{item.name}}</li>
+        </ul>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
