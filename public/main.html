@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id='app'>
+        <p v-on:click='click'>{{ message }}</p>
+        <app-h1 v-bind:msg='msg_h1'></app-h1>
+        <app-h2 v-on:pass='[h2_click($event), inc_num()]' v-bind:data='{msg: msg_h2, num: num}'></app-h2>
+        <app-h3 v-bind:msg='msg_h3'></app-h3>
+        <app-input v-on:pass='input_change'></app-input>
+        <router-view></router-view>
+        <router-link to='/main/h4'>h4</router-link>
+        <router-link to='/main/h5'>h5</router-link>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="./main.js"></script>
+</body>
+</html>
