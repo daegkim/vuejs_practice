@@ -20,4 +20,9 @@ router.get('/list', function(req, res) {
     res.send(jsonStr)
 })
 
+router.post('/submit', function(req, res) {
+    var jsonStr = JSON.stringify(req.body)
+    res.send(jsonStr)
+})
+
 module.exports = router;

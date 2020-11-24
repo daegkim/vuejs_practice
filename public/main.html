@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./main.css">
     <title>Document</title>
 </head>
 <body>
@@ -23,9 +24,22 @@
         <button v-on:click='getData'>GETDATA</button>
         <button v-on:click='getList'>GETLIST</button>
         <p>{{ message }}</p>
-        <ul>
-            <li v-for='item in list'>{{ item.id }} : {{item.name}}</li>
+        <ul v-bind:class='ul_style'>
+            <li v-bind:style='li_style' v-for='item in list'>{{ item.id }} : {{item.name}}</li>
         </ul>
+        <!-- v-if : remove elem from DOM -->
+        <!-- v-show : change display property to none(display:none) -->
+        <p v-on:click='changeFlag' v-if='flag'>{{ app2_msg_with_flag }}</p>
+        <p v-on:click='changeFlag' v-else>{{ app2_msg_with_flag }}</p>
+        <form action='/value/submit' method='post' v-on:submit='app2_submit'>
+            <input v-model='app_model.text' type="text" placeholder="type on" name='text'>
+            <div v-for='item in member_list'>
+                <input v-model='app_model.members' type="checkbox" v-bind:value='item' name='name'>
+                <label v-bind:for='item'>{{ item }}</label>
+            </div>
+            <input type="submit" value="send">
+        </form>
+        <div> {{ resultForm }}</div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>

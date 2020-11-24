@@ -88,7 +88,22 @@ var vm2 = new Vue({
     el: '#app2',
     data: {
         message: '',
-        list: []
+        list: [],
+        li_style: 'color: red',
+        ul_style: 'ul_style',
+        app2_msg: 'app2 msg!!',
+        flag: true,
+        app_model: {
+            text: '',
+            members: []
+        },
+        member_list: ['john', 'mike', 'son'],
+        resultForm: ''
+    },
+    computed: {
+        app2_msg_with_flag: function() {
+            return this.app2_msg + ' : ' + String(this.flag)
+        }
     },
     methods: {
         getData: function() {
@@ -120,6 +135,23 @@ var vm2 = new Vue({
             else{
                 this.list = []
             }
+        },
+        changeFlag: function() {
+            this.flag = !this.flag
+        },
+        app2_submit: function(e) {
+            //form's submit event moves to another page.
+            //e.preventDefalut() prevent default event.
+            e.preventDefault()
+
+            axios({
+                method: e.target.method,
+                url: e.target.action,
+                data: this.app_model
+            })
+            .then((res) => {
+                this.resultForm = res.data
+            })
         }
     }
 })

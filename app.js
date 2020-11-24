@@ -9,7 +9,8 @@ app.use(function(req, res, next) {
     next()
 })
 
-app.use(express.static('public'));
+app.use(express.static('public'))
+app.use(express.json())
 
 app.use('/main', mainRouter)
 app.use('/value', valueRouter)
